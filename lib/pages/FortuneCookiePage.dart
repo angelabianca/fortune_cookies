@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:wasserwaage/model/FortuneCookieViewModel.dart';
 import 'package:share/share.dart';
+
 
 class FortuneCookiePage extends StatelessWidget {
 
-  String text = '';
-  String subject = '';
+  FortuneCookieViewModel model;
+
+  FortuneCookiePage(this.model);
+
+  String text = 'Schau dir meinen heutigen Glückskeks an: \n';
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +24,19 @@ class FortuneCookiePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Share text:',
-                  hintText: 'Enter some text and/or link to share',
-          )
-        )
+              Text(model.txt),
+              Image(image: AssetImage('images/transparentCookie.png')),
+
+              FlatButton(
+                child: Text("Glückskeks teilen"),
+                color: Colors.brown,
+                onPressed: (){
+                  Share.share(text + model.txt);
+                },
+              )
+
     ]
+
     )
         )
     );
